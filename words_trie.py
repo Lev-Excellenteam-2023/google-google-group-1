@@ -1,4 +1,4 @@
-from sentences_trie import SentenceTrie, SentenceNode
+from Sentence_trie import SentenceTrie, SentenceNode
 
 
 class TrieNode:
