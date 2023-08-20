@@ -56,7 +56,7 @@ class Trie(object):
         node.counter += 1
 
         # add the node with word to the references
-        node.sentenceTrieRef.apend(sentenceNode)
+        node.sentenceTrieRef.append(sentenceNode)
 
     def dfs(self, node, prefix):
         """Depth-first traversal of the trie
@@ -97,12 +97,13 @@ class Trie(object):
         return sorted(self.output, key=lambda x: x[1], reverse=True)
 
 
+if __name__ == '__main__':
 
-t = Trie()
-t.insert("was")
-t.insert("word")
-t.insert("war")
-t.insert("what")
-t.insert("where")
-print(t.query("wh"))
+    t = Trie()
+    t.insert(SentenceNode("was", None))
+    t.insert(SentenceNode("word", None ))
+    t.insert(SentenceNode("war", None))
+    t.insert(SentenceNode("what", None))
+    t.insert(SentenceNode("where", None))
+    print(t.query("wh"))
 #[('what', 1), ('where', 1)]
