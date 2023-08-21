@@ -7,6 +7,8 @@ ROOT_DIR = r'C:\BootCamp2023\google_project\rpoject\Texts'
 
 sentenceTrie = Sentence_trie.SentenceTrie()
 
+logging.basicConfig(level=logging.INFO)
+
 
 def get_txt_files() -> list[str]:
     # Returns a list of names in list files.
@@ -14,17 +16,20 @@ def get_txt_files() -> list[str]:
 
 
 def read_lines(path: str):
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         count = 0
         for line in file:
             count += 1
             sentenceTrie.add_sentence(line.strip())
+            print(line.strip())
             logging.info(f"line{count}: {line}")
 
 
 def main():
     files = get_txt_files()
-    read_lines(files[0])
+    for file in files:
+        print(file)
+        read_lines(file)
 
 
 if __name__ == "__main__":
