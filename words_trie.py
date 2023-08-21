@@ -1,13 +1,5 @@
-from Sentence_trie import SentenceTrie, SentenceNode
-import logging
+from Sentence_trie import SentenceNode
 import typing
-
-logging.basicConfig(filename='log.txt',
-                    filemode='a',
-                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                    datefmt='%H:%M:%S',
-                    level=logging.INFO)
-
 
 class TrieNode:
     """A node in the trie structure"""
