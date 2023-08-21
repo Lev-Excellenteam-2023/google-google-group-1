@@ -1,6 +1,5 @@
 import logging
 
-logging.basicConfig(level=logging.INFO)
 
 class SentenceNode:
     def __init__(self, word, father, children=None):
