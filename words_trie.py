@@ -1,4 +1,4 @@
-from Sentence_trie import SentenceNode
+from Sentence_trie import SentenceNode, SentenceTrie
 import typing
 import logging
 
