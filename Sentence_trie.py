@@ -1,4 +1,6 @@
 import logging
+import typing
+import words_trie
 
 
 class SentenceNode:
@@ -27,12 +29,31 @@ class SentenceTrie:
         father.children.append(node)
         return node
 
-    def complete_sentence(self, node):
+    def complete_sentence(self, node : SentenceNode) -> typing.List[str]:
         sentence = []
         while node.father:
             sentence.append(node.word)
             node = node.father
         sentence.reverse()
+        logging.info('Sentence completed: %s', ' '.join(sentence))
         return ' '.join(sentence)
+
+    def find_all_terminals(self, node : SentenceNode) -> typing.List[SentenceNode]:
+        if not node.children:
+            return [node]
+        terminals = []
+        for child in node.children:
+            terminals.extend(self.find_all_terminals(child))
+        return terminals
+
+    def find_all_nodes(self, node: SentenceNode) -> typing.List[SentenceNode]:
+        if not node.children:
+            return [node]
+        nodes = [node]
+        for child in node.children:
+            nodes.extend(self.find_all_nodes(child))
+        return nodes
+
+
 
 
