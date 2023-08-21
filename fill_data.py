@@ -1,4 +1,5 @@
-from words_trie import Trie, SentenceTrie, SentenceNode
+from words_trie import Trie
+from Sentence_trie import SentenceTrie
 
 if __name__ == '__main__':
     PATH = 'Data_to_tests.txt'
