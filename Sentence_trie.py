@@ -49,7 +49,7 @@ class SentenceTrie:
     def find_all_nodes(self, node: SentenceNode) -> typing.List[SentenceNode]:
         if not node.children:
             return [node]
-        nodes = [node]
+        nodes = [node] if node.word else []
         for child in node.children:
             nodes.extend(self.find_all_nodes(child))
         return nodes

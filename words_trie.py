@@ -124,16 +124,9 @@ class Trie(object):
         # return all references
         return node.sentenceTrieRef
 
+    def insert_data(self, sentence_trie: SentenceTrie):
+        sentenceNodes = sentence_trie.find_all_nodes(sentence_trie.root)
+        for sentenceNode in sentenceNodes:
+            self.insert(sentenceNode)
 
 
-
-if __name__ == '__main__':
-
-    t = Trie()
-    t.insert(SentenceNode("was", None))
-    t.insert(SentenceNode("word", None))
-    t.insert(SentenceNode("war", None))
-    t.insert(SentenceNode("what", None))
-    t.insert(SentenceNode("where", None))
-    print(t.query("wh"))
-#[('what', 1), ('where', 1)]
