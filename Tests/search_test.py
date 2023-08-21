@@ -64,7 +64,7 @@ def test_autocomplete_with_incomplete_last_word_2():
     for sentence_node in sentence_nodes:
         sentence = complete_sentence(sentence_node)
         sentences.append(sentence)
-    assert sentences == ['hello dear Alexander']
+    assert sentences == ['hello dear Alexander', 'Alexander is greate student', 'Alexander is not calm']
 
 
 def test_autocomplete_with_incomplete_last_word_3():
@@ -101,3 +101,5 @@ def test_autocomplete_with_incomplete_last_word_6():
         sentence = complete_sentence(sentence_node)
         sentences.append(sentence)
     assert sentences == ['Alexander is greate student', 'Alexander is not calm', 'I ignore him']
+
+

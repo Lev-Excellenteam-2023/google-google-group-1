@@ -1,5 +1,5 @@
+import logging
 from typing import List
-
  
 def check_possible_variations(original_word: str, candidate_words: List[str]) -> List[str]:
     """
@@ -23,7 +23,8 @@ def check_possible_variations(original_word: str, candidate_words: List[str]) ->
         elif len(candidate_word) == len(original_word) - 1:
             # Check for one letter deletion
             for i in range(len(original_word)):
-                if candidate_word[:i] + candidate_word[i + 1:] == original_word:
+                if original_word[:i] + original_word[i + 1:] == candidate_word:
                     possible_variations.append(candidate_word)
                     break
     return possible_variations
+
