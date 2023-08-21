@@ -82,6 +82,9 @@ class SentenceTrie:
             nodes.extend(self.find_all_nodes(child))
         return nodes
 
+    def get_children(self):
+        return self.root.children
+
 
 
 
