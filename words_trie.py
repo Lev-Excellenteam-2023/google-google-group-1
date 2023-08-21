@@ -1,5 +1,6 @@
 from Sentence_trie import SentenceNode
 import typing
+import logging
 
 class TrieNode:
     """A node in the trie structure"""
