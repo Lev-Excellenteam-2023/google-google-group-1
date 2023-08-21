@@ -13,7 +13,7 @@ sentence_trie.add_sentence('I ignore him')
 words_trie.insert_data(sentence_trie)
 
 
-def autocomplete_no_mistakes_1():
+def test_autocomplete_no_mistakes_1():
     sentence_nodes = autocomplete_no_mistakes('hello', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
@@ -22,7 +22,7 @@ def autocomplete_no_mistakes_1():
     assert sentences == ['hello world', 'hello dear Alexander']
 
 
-def autocomplete_no_mistakes_2():
+def test_autocomplete_no_mistakes_2():
     sentence_nodes = autocomplete_no_mistakes('hello dear', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
@@ -31,7 +31,7 @@ def autocomplete_no_mistakes_2():
     assert sentences == ['hello dear Alexander']
 
 
-def autocomplete_no_mistakes_3():
+def test_autocomplete_no_mistakes_3():
     sentence_nodes = autocomplete_no_mistakes('dear', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
@@ -40,7 +40,7 @@ def autocomplete_no_mistakes_3():
     assert sentences == ['hello dear Alexander', 'dear Yehuda Shani']
 
 
-def autocomplete_no_mistakes_4():
+def test_autocomplete_no_mistakes_4():
     sentence_nodes = autocomplete_no_mistakes('student', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
@@ -49,7 +49,7 @@ def autocomplete_no_mistakes_4():
     assert sentences == ['Alexander is greate student']
 
 
-def autocomplete_with_incomplete_last_word_1():
+def test_autocomplete_with_incomplete_last_word_1():
     sentence_nodes = autocomplete_with_incomplete_last_word('stu', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
@@ -58,25 +58,43 @@ def autocomplete_with_incomplete_last_word_1():
     assert sentences == ['Alexander is greate student']
 
 
-def autocomplete_with_incomplete_last_word_2():
-    sentence_nodes = autocomplete_with_incomplete_last_word('dea', sentence_trie, words_trie)
+def test_autocomplete_with_incomplete_last_word_2():
+    sentence_nodes = autocomplete_with_incomplete_last_word('Alexan', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
         sentence = complete_sentence(sentence_node)
         sentences.append(sentence)
-    assert sentences == ['hello dear Alexander', 'dear Yehuda Shani']
+    assert sentences == ['hello dear Alexander']
 
 
-def autocomplete_with_incomplete_last_word_3():
-    sentence_nodes = autocomplete_with_incomplete_last_word('Alexander i', sentence_trie, words_trie)
+def test_autocomplete_with_incomplete_last_word_3():
+    sentence_nodes = autocomplete_with_incomplete_last_word('Alexander is not c', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
         sentence = complete_sentence(sentence_node)
         sentences.append(sentence)
-    assert sentences == ['Alexander is greate student', 'Alexander is not calm']
+    assert sentences == ['Alexander is not calm']
 
 
-def autocomplete_with_incomplete_last_word_4():
+def test_autocomplete_with_incomplete_last_word_4():
+    sentence_nodes = autocomplete_with_incomplete_last_word('dear Yehuda S', sentence_trie, words_trie)
+    sentences = []
+    for sentence_node in sentence_nodes:
+        sentence = complete_sentence(sentence_node)
+        sentences.append(sentence)
+    assert sentences == ['dear Yehuda Shani']
+
+
+def test_autocomplete_with_incomplete_last_word_5():
+    sentence_nodes = autocomplete_with_incomplete_last_word('is gre', sentence_trie, words_trie)
+    sentences = []
+    for sentence_node in sentence_nodes:
+        sentence = complete_sentence(sentence_node)
+        sentences.append(sentence)
+    assert sentences == ['Alexander is greate student']
+
+
+def test_autocomplete_with_incomplete_last_word_6():
     sentence_nodes = autocomplete_with_incomplete_last_word('i', sentence_trie, words_trie)
     sentences = []
     for sentence_node in sentence_nodes:
