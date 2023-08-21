@@ -1,4 +1,12 @@
 from Sentence_trie import SentenceTrie, SentenceNode
+import logging
+import typing
+
+logging.basicConfig(filename='log.txt',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
 
 
 class TrieNode:
@@ -41,10 +49,12 @@ class Trie(object):
         # Check if there is no child containing the character, create a new child for the current node
         for char in sentenceNode.word:
             if char in node.children:
+                logging.info('Node found with char: %s', char)
                 node = node.children[char]
             else:
                 # If a character is not found,
                 # create a new node in the trie
+                logging.info('Node created with char: %s', char)
                 new_node = TrieNode(char)
                 node.children[char] = new_node
                 node = new_node
@@ -96,12 +106,32 @@ class Trie(object):
         # Sort the results in reverse order and return
         return sorted(self.output, key=lambda x: x[1], reverse=True)
 
+    def get_references_from_word(self, word : str) -> typing.List[SentenceNode]:
+        """Given a word, retrieve all references stored in
+        the trie with that word, sort the words by the number of
+        times they have been inserted
+        """
+        node = self.root
+
+        # Check if the prefix is in the trie
+        for char in word:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                # cannot found the prefix, return empty list
+                return []
+
+        # return all references
+        return node.sentenceTrieRef
+
+
+
 
 if __name__ == '__main__':
 
     t = Trie()
     t.insert(SentenceNode("was", None))
-    t.insert(SentenceNode("word", None ))
+    t.insert(SentenceNode("word", None))
     t.insert(SentenceNode("war", None))
     t.insert(SentenceNode("what", None))
     t.insert(SentenceNode("where", None))
