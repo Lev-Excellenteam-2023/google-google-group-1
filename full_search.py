@@ -2,8 +2,8 @@ from Sentence_trie import SentenceTrie, complete_sentence, SentenceNode
 from words_trie import Trie
 from typing import List
 from scoring import score_sentence
-from search import autocomplete_with_incomplete_last_word, find_terminal_nodes_from_search
-from variations import check_possible_variations, find_candidate_words_for_last_word
+from search import autocomplete_with_incomplete_last_word, find_terminal_nodes_from_search, check_sentence_exists, autocomplete_no_mistakes
+from variations import check_possible_variations, find_candidate_words_for_last_word, calculate_all_variations
 
 
 def fix_last_word(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> List[str]:
@@ -69,6 +69,29 @@ def check_frase_as_is(sentence: str, sentence_trie: SentenceTrie, words_trie: Tr
 
     return final_sentences[:5]
 
+
+def find_mistakes(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> List[str]:
+    """
+    Receives a sentence and returns a list of all the possible completions, using a naive approach that checks all possibilities
+    :param sentence: str
+    :param sentence_trie: SentenceTrie object
+    :param words_trie: Trie object
+    :return: a list of all the possible completions
+    """
+    possible_variations = calculate_all_variations(sentence)
+    # filter redundant variations
+    no_duplicates_variations = list(dict.fromkeys(possible_variations))
+
+
+    possible_sentences = [variation for variation in no_duplicates_variations if check_sentence_exists(variation, sentence_trie, words_trie)]
+
+    final_sentence_nodes = [autocomplete_no_mistakes(sentence, sentence_trie, words_trie) for sentence in possible_sentences]
+
+    flattened_list = [node for sublist in final_sentence_nodes for node in sublist]
+
+    final_sentences = [(complete_sentence(node), score_sentence(sentence, complete_sentence(node))) for node in flattened_list] # scoring by hand, 2 points per letter
+
+    return final_sentences
 
 
 

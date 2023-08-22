@@ -1,4 +1,4 @@
-from full_search import check_frase_as_is
+from full_search import check_frase_as_is, check_frase_as_is_2
 from Sentence_trie import SentenceTrie , complete_sentence
 from words_trie import Trie
 
@@ -59,6 +59,25 @@ def test_check_frase_as_is_7():
     final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
     assert final_sentences[0][0] == 'hello world'
     assert final_sentences[1][0] == 'hello worlb'
+
+
+def test_check_frase_as_is_2_1():
+    sentence = 'Alex ander is'
+    final_sentences = check_frase_as_is_2(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'Alexander is great student'
+
+
+def test_check_frase_as_is_2_2():
+    sentence = 'Alexwnder is'
+    final_sentences = check_frase_as_is_2(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'Alexander is great student'
+
+def test_check_frase_as_is_2_3():
+    sentence = 'Alex'
+    final_sentences = check_frase_as_is_2(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'Alexander is great student'
+
+
 
 
 

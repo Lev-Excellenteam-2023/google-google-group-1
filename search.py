@@ -57,6 +57,29 @@ def autocomplete_with_incomplete_last_word(incomplete_sentence: str, sentence_tr
         sentence_nodes += autocomplete_no_mistakes(' '.join(words[:-1]) + ' ' + word, sentence_trie, words_trie)
     return sentence_nodes
 
+def check_sentence_exists(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> bool:
+    """
+    Checks if a sentence exists in the trie
+    :param sentence: input sentence
+    :return: bool
+    """
+
+    words = sentence.split()
+    references = words_trie.get_references_from_word(words[0])
+    for word in words[1:]:
+        children = []
+        for reference in references:
+            children += reference.children
+        references = []
+        for child in children:
+            if child.word == word:
+                references.append(child)
+
+    for reference in references:
+        if reference.word == words[-1]:
+            return True
+
+
 
 def main():
     sentence_trie = SentenceTrie()

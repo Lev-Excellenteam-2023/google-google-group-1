@@ -11,6 +11,7 @@ class SentenceNode:
         logging.info('Node created with word: %s', self.word)
 
 
+
 def complete_sentence(node: SentenceNode) -> str:
     """
     Receives a terminal node and returns the sentence by going up the tree
@@ -84,6 +85,10 @@ class SentenceTrie:
 
     def get_children(self):
         return self.root.children
+
+
+
+
 
 
 
