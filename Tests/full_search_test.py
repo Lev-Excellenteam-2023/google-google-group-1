@@ -46,8 +46,8 @@ def test_check_frase_as_is_6():
     words_trie.insert_data(sentence_trie)
     sentence = 'hello worlp'
     final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
-    assert final_sentences[0][0] == 'hello world'
-    assert final_sentences[1][0] == 'hello worlb'
+    assert final_sentences[0][0] == 'hello worlb'
+    assert final_sentences[1][0] == 'hello world'
 
 def test_check_frase_as_is_7():
     sentence_trie = SentenceTrie()
@@ -59,6 +59,25 @@ def test_check_frase_as_is_7():
     final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
     assert final_sentences[0][0] == 'hello world'
     assert final_sentences[1][0] == 'hello worlb'
+
+
+def test_check_frase_as_is_2_1():
+    sentence = 'Alex ander is'
+    final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'Alexander is great student'
+
+
+def test_check_frase_as_is_2_2():
+    sentence = 'Alexwnder is'
+    final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'Alexander is great student'
+
+def test_check_frase_as_is_2_3():
+    sentence = 'Alex'
+    final_sentences = check_frase_as_is(sentence, sentence_trie, words_trie)
+    assert final_sentences[0][0] == 'hello dear Alexander'
+
+
 
 
 

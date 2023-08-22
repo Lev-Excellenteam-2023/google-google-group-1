@@ -74,3 +74,33 @@ def find_candidate_words_for_last_word(sentence:str, sentence_trie: SentenceTrie
 
     return possible_last_words
 
+def calculate_all_variations(sentence: str) -> List[str]:
+    """
+    Receives a sentence and returns a list of all the possible variations, by changing one every letter
+    And by adding and deleting one letter
+    :param sentence: str
+    :return: list of str
+    """
+
+    variations = []
+
+    # Changing one letter
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        for i in range(len(sentence)):
+            variations.append(sentence[:i] + letter + sentence[i + 1:])
+
+    # Adding one letter
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        for i in range(len(sentence) + 1):
+            variations.append(sentence[:i] + letter + sentence[i:])
+
+    # Deleting one letter
+    for i in range(len(sentence)):
+        variations.append(sentence[:i] + sentence[i + 1:])
+
+
+    return variations
+
+
+
+
