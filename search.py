@@ -1,16 +1,17 @@
 from Sentence_trie import SentenceTrie, complete_sentence, SentenceNode
 from words_trie import Trie
 from typing import List
+from scoring import score_sentence
 
 
 def find_terminal_nodes_from_search(sentence: str, words_trie: Trie) -> List[SentenceNode]:
     """
-    Receives a sentence and returns a list of all the possible completions
+    Receives a sentence and returns a list of all the possible sentence nodes that represent the sentence
     :param sentence: str
     :param sentence_trie: SentenceTrie object
     :param words_trie: Trie object
     :return: a list of all the possible completions
-    """
+     """
     words = sentence.split()
     references = words_trie.get_references_from_word(words[0])
     for word in words[1:]:
@@ -24,9 +25,10 @@ def find_terminal_nodes_from_search(sentence: str, words_trie: Trie) -> List[Sen
 
     return references
 
+
 def autocomplete_no_mistakes(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> List[SentenceNode]:
     """
-    Receives a sentence and returns a list of all the possible completions
+    Receives a sentence and returns a list of all the possible sentences that contain the input sentence
     :param sentence: str
     :param sentence_trie: SentenceTrie object
     :param words_trie: Trie object
@@ -38,7 +40,9 @@ def autocomplete_no_mistakes(sentence: str, sentence_trie: SentenceTrie, words_t
         terminal_nodes += sentence_trie.find_all_terminals(reference)
     return terminal_nodes
 
-def autocomplete_with_incomplete_last_word(incomplete_sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> List[SentenceNode]:
+
+def autocomplete_with_incomplete_last_word(incomplete_sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> \
+        List[SentenceNode]:
     """
     Receives a sentence and returns a list of all the possible completions
     :param sentence: str
@@ -54,6 +58,7 @@ def autocomplete_with_incomplete_last_word(incomplete_sentence: str, sentence_tr
         sentence_nodes += autocomplete_no_mistakes(' '.join(words[:-1]) + ' ' + word, sentence_trie, words_trie)
     return sentence_nodes
 
+
 def main():
     sentence_trie = SentenceTrie()
     sentence_trie.add_sentence('hello world')
@@ -67,11 +72,6 @@ def main():
     for node in incomplete_nodes:
         print(complete_sentence(node))
 
+
 if __name__ == '__main__':
     main()
-
-
-
-
-
-

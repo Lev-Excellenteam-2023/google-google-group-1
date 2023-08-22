@@ -1,4 +1,7 @@
 import logging
+from search import autocomplete_no_mistakes, autocomplete_with_incomplete_last_word, find_terminal_nodes_from_search
+from Sentence_trie import SentenceTrie, SentenceNode
+from words_trie import Trie
 from typing import List
  
 def check_possible_variations(original_word: str, candidate_words: List[str]) -> List[str]:
@@ -27,4 +30,47 @@ def check_possible_variations(original_word: str, candidate_words: List[str]) ->
                     possible_variations.append(candidate_word)
                     break
     return possible_variations
+
+
+def find_candidate_words(sentence: str, word_to_change: int, sentence_trie: SentenceTrie, words_trie: Trie) -> List[str]:
+    """
+    Receives a sentence and word to change, and finds what words can come instead of the word to change
+    :param sentence: str
+    :param word_to_change: int
+    :param sentence_trie: SentenceTrie object
+    :param words_trie: Trie object
+    :return: a list of all the possible completions
+    """
+    words = sentence.split()
+
+    # If the word to change is the last word in the sentence, send to special function
+    if word_to_change == len(words) - 1:
+        return find_candidate_words_for_last_word(sentence, sentence_trie, words_trie)
+
+
+
+def find_candidate_words_for_last_word(sentence:str, sentence_trie: SentenceTrie, words_trie: Trie) -> List[str]:
+    """
+    Receives a sentence and finds what words can come instead of the last word
+    :param sentence: str
+    :param sentence_trie: SentenceTrie object
+    :param words_trie: Trie object
+    :return: a list of all the possible completions
+    """
+    # Check if it has only one word
+    if len(sentence.split()) == 1:
+        possible_words = words_trie.query("")
+        possible_words = [word[0] for word in possible_words]
+        return possible_words
+
+    words = sentence.split()
+    new_sentence = ' '.join(words[:-1])
+    terminal_nodes = find_terminal_nodes_from_search(new_sentence, words_trie)
+    possible_last_nodes = []
+    for node in terminal_nodes:
+        possible_last_nodes.extend(node.children)
+
+    possible_last_words = [node.word for node in possible_last_nodes]
+
+    return possible_last_words
 
