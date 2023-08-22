@@ -1,4 +1,5 @@
-import scoring
+from src import scoring
+
 
 def test_score_sentence_missing_letter_1():
     input_sentence = 'ello'
