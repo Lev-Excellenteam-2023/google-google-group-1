@@ -2,6 +2,9 @@ from Sentence_trie import SentenceNode, SentenceTrie
 import typing
 import logging
 
+from rpoject.decorators import timeit
+
+
 class TrieNode:
     """A node in the trie structure"""
 
@@ -34,6 +37,7 @@ class Trie(object):
         """
         self.root = TrieNode("")
 
+    # @timeit
     def insert(self, sentenceNode: SentenceNode):
         """Insert a word into the trie"""
         node = self.root
@@ -61,6 +65,7 @@ class Trie(object):
         # add the node with word to the references
         node.sentenceTrieRef.append(sentenceNode)
 
+    @timeit
     def dfs(self, node, prefix):
         """Depth-first traversal of the trie
 
@@ -75,6 +80,7 @@ class Trie(object):
         for child in node.children.values():
             self.dfs(child, prefix + node.char)
 
+    @timeit
     def query(self, x):
         """Given an input (a prefix), retrieve all words stored in
         the trie with that prefix, sort the words by the number of
@@ -99,6 +105,7 @@ class Trie(object):
         # Sort the results in reverse order and return
         return sorted(self.output, key=lambda x: x[1], reverse=True)
 
+    @timeit
     def get_references_from_word(self, word : str) -> typing.List[SentenceNode]:
         """Given a word, retrieve all references stored in
         the trie with that word, sort the words by the number of
@@ -117,6 +124,7 @@ class Trie(object):
         # return all references
         return node.sentenceTrieRef
 
+    @timeit
     def insert_data(self, sentence_trie: SentenceTrie):
         sentenceNodes = sentence_trie.find_all_nodes(sentence_trie.root)
         for sentenceNode in sentenceNodes:
