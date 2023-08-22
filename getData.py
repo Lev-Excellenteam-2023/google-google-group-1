@@ -31,19 +31,16 @@ def main():
     files = None
     try:
         files = get_txt_files()
-        print(files[2])
     except Exception as ex:
         print(ex)
 
     try:
-        # print(files[2])
-        #
-        # read_lines(files[2])
+        print(files[2])
+        read_lines(files[2])
 
-
-        for file in files:
-            print(file)
-            read_lines(file)
+        # for file in files:
+        #     print(file)
+        #     read_lines(file)
     except Exception as ex:
         print(ex)
     print("Sentences Done")
