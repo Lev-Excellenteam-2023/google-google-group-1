@@ -1,6 +1,6 @@
-from search import autocomplete_no_mistakes, autocomplete_with_incomplete_last_word
-from Sentence_trie import SentenceTrie , complete_sentence
-from words_trie import Trie
+from src.search import autocomplete_no_mistakes, autocomplete_with_incomplete_last_word
+from src.Sentence_trie import SentenceTrie , complete_sentence
+from src.words_trie import Trie
 
 sentence_trie = SentenceTrie()
 words_trie = Trie()

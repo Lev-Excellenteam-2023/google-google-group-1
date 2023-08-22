@@ -1,6 +1,5 @@
-import words_trie
+from src import words_trie
 from unittest.mock import MagicMock
-import logging
 
 
 def test_complete_word_1():

@@ -1,6 +1,6 @@
 from full_search import check_frase_as_is
-from Sentence_trie import SentenceTrie , complete_sentence
-from words_trie import Trie
+from src.Sentence_trie import SentenceTrie
+from src.words_trie import Trie
 
 sentence_trie = SentenceTrie()
 words_trie = Trie()
