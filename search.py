@@ -8,7 +8,6 @@ def find_terminal_nodes_from_search(sentence: str, words_trie: Trie) -> List[Sen
     """
     Receives a sentence and returns a list of all the possible sentence nodes that represent the sentence
     :param sentence: str
-    :param sentence_trie: SentenceTrie object
     :param words_trie: Trie object
     :return: a list of all the possible completions
      """

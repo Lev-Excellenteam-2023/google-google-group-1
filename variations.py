@@ -74,3 +74,11 @@ def find_candidate_words_for_last_word(sentence:str, sentence_trie: SentenceTrie
 
     return possible_last_words
 
+def calculate_all_variations(sentence: str) -> List[str]:
+    """
+    Receives a sentence and returns a list of all the possible variations
+    :param sentence: str
+    :return: list of str
+    """
+
+
