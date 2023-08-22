@@ -1,6 +1,8 @@
 import logging
 import typing
 
+from rpoject.decorators import timeit
+
 
 class SentenceNode:
     def __init__(self, word, father, children=None):
@@ -9,7 +11,6 @@ class SentenceNode:
         self.children = children or []
         # add logging that prints the word of the node
         logging.info('Node created with word: %s', self.word)
-
 
 
 def complete_sentence(node: SentenceNode) -> str:
@@ -31,6 +32,7 @@ class SentenceTrie:
     def __init__(self):
         self.root = SentenceNode(None, None)
 
+    @timeit
     def add_sentence(self, sentence: str) -> None:
         """
         Adds a sentence to the trie
@@ -42,6 +44,7 @@ class SentenceTrie:
         for word in words:
             node = self.add_word(word, node)
 
+    @timeit
     def add_word(self, word: str, father: SentenceNode) -> SentenceNode:
         """
         Adds a word to the trie, called only by add_sentence
@@ -56,6 +59,7 @@ class SentenceTrie:
         father.children.append(node)
         return node
 
+    @timeit
     def find_all_terminals(self, node: SentenceNode) -> typing.List[SentenceNode]:
         """
         Finds all the terminal nodes of a node, called when there is a need to use function complete_sentence, that receives
@@ -70,6 +74,7 @@ class SentenceTrie:
             terminals.extend(self.find_all_terminals(child))
         return terminals
 
+    @timeit
     def find_all_nodes(self, node: SentenceNode) -> typing.List[SentenceNode]:
         """
         Finds all the nodes of a node, called when there is a need to build words_trie
@@ -83,15 +88,7 @@ class SentenceTrie:
             nodes.extend(self.find_all_nodes(child))
         return nodes
 
+    @timeit
     def get_children(self):
         return self.root.children
-
-
-
-
-
-
-
-
-
 
