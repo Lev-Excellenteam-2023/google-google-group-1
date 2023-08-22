@@ -8,6 +8,8 @@
 1. The user enters a string input into the CLI and presses the "Enter" key.
 2. The five most relevant complete sentences are presented.
    Relevant sentences are those that contain the user's input.
+3. press "#" for new searching.
+4. Enter "close" to end.
 
 ### Additional Features:
 1. Correction of one missing letter in the input (e.g., 'helo' to 'hello').
