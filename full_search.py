@@ -56,13 +56,28 @@ def check_frase_as_is(sentence: str, sentence_trie: SentenceTrie, words_trie: Tr
     if len(final_sentences) >= 5:
         return final_sentences[:5]
 
-    # Step 2: fix last word
-    complete_sentences = fix_last_word(sentence, sentence_trie, words_trie)
-    final_sentences_without_score = [final[0] for final in final_sentences]
-    filtered_sentences = [complete for complete in complete_sentences if complete not in final_sentences_without_score] # filters out sentences that were already added
+   #  # Step 2: fix last word
+   #  complete_sentences = fix_last_word(sentence, sentence_trie, words_trie)
+   #  final_sentences_without_score = [final[0] for final in final_sentences]
+   #  filtered_sentences = [complete for complete in complete_sentences if complete not in final_sentences_without_score] # filters out sentences that were already added
+   #
+   # # add possible sentences to final sentences
+   #  final_sentences += [(possibility, score_sentence(sentence, possibility)) for possibility in filtered_sentences]
 
-   # add possible sentences to final sentences
-    final_sentences += [(possibility, score_sentence(sentence, possibility)) for possibility in filtered_sentences]
+    possible_additions = find_mistakes(sentence, sentence_trie, words_trie)
+    scores = [score_sentence(sentence, possibility) for possibility in possible_additions]
+
+    for i, addition in enumerate(possible_additions):
+        nodes = autocomplete_no_mistakes(addition, sentence_trie, words_trie)
+        for node in nodes:
+            terminal_nodes += sentence_trie.find_all_terminals(node)
+            final_sentences.append((complete_sentence(node), scores[i]))
+
+
+    # remove duplicates
+    final_sentences = list(dict.fromkeys(final_sentences))
+
+    final_sentences.sort(key=lambda tup: tup[1], reverse=True)
 
     if len(final_sentences) >= 5:
         return final_sentences[:5]
@@ -82,16 +97,9 @@ def find_mistakes(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) 
     # filter redundant variations
     no_duplicates_variations = list(dict.fromkeys(possible_variations))
 
+    possible_sentences = [variation for variation in no_duplicates_variations if check_sentence_exists(variation, sentence_trie, words_trie) and variation != sentence]
 
-    possible_sentences = [variation for variation in no_duplicates_variations if check_sentence_exists(variation, sentence_trie, words_trie)]
-
-    final_sentence_nodes = [autocomplete_no_mistakes(sentence, sentence_trie, words_trie) for sentence in possible_sentences]
-
-    flattened_list = [node for sublist in final_sentence_nodes for node in sublist]
-
-    final_sentences = [(complete_sentence(node), score_sentence(sentence, complete_sentence(node))) for node in flattened_list] # scoring by hand, 2 points per letter
-
-    return final_sentences
+    return possible_sentences
 
 
 
