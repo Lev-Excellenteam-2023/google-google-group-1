@@ -2,7 +2,7 @@ from Sentence_trie import SentenceNode, SentenceTrie
 import typing
 import logging
 
-from rpoject.decorators import timeit
+from decorators import timeit
 
 
 class TrieNode:

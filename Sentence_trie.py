@@ -1,7 +1,7 @@
 import logging
 import typing
 
-from rpoject.decorators import timeit
+from decorators import timeit
 
 
 class SentenceNode:
