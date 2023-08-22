@@ -1,4 +1,4 @@
-from Sentence_trie import SentenceTrie, complete_sentence
+from src.Sentence_trie import SentenceTrie, complete_sentence
 
 def test_complete_sentence_1():
     trie = SentenceTrie()

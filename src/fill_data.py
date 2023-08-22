@@ -2,7 +2,7 @@ from words_trie import Trie
 from Sentence_trie import SentenceTrie
 
 if __name__ == '__main__':
-    PATH = 'Data_to_tests.txt'
+    PATH = '../Data_to_tests.txt'
 
     # Using readlines()
     file1 = open(PATH, 'r')
