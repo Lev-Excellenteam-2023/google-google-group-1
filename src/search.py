@@ -1,14 +1,13 @@
-from Sentence_trie import SentenceTrie, complete_sentence, SentenceNode
-from words_trie import Trie
+from src.Sentence_trie import SentenceTrie, complete_sentence, SentenceNode
+from src.words_trie import Trie
 from typing import List
-from scoring import score_sentence
+from src.scoring import score_sentence
 
 
 def find_terminal_nodes_from_search(sentence: str, words_trie: Trie) -> List[SentenceNode]:
     """
     Receives a sentence and returns a list of all the possible sentence nodes that represent the sentence
     :param sentence: str
-    :param sentence_trie: SentenceTrie object
     :param words_trie: Trie object
     :return: a list of all the possible completions
      """
@@ -57,6 +56,29 @@ def autocomplete_with_incomplete_last_word(incomplete_sentence: str, sentence_tr
     for word in possible_last_words:
         sentence_nodes += autocomplete_no_mistakes(' '.join(words[:-1]) + ' ' + word, sentence_trie, words_trie)
     return sentence_nodes
+
+def check_sentence_exists(sentence: str, sentence_trie: SentenceTrie, words_trie: Trie) -> bool:
+    """
+    Checks if a sentence exists in the trie
+    :param sentence: input sentence
+    :return: bool
+    """
+
+    words = sentence.split()
+    references = words_trie.get_references_from_word(words[0])
+    for word in words[1:]:
+        children = []
+        for reference in references:
+            children += reference.children
+        references = []
+        for child in children:
+            if child.word == word:
+                references.append(child)
+
+    for reference in references:
+        if reference.word == words[-1]:
+            return True
+
 
 
 def main():

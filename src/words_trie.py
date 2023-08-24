@@ -1,8 +1,8 @@
-from Sentence_trie import SentenceNode, SentenceTrie
+from src.Sentence_trie import SentenceNode, SentenceTrie
 import typing
 import logging
 
-from decorators import timeit
+from src.decorators import timeit
 
 
 class TrieNode:

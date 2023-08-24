@@ -1,8 +1,7 @@
-import re
-from words_trie import Trie
-from Sentence_trie import SentenceTrie
-from full_search import check_frase_as_is
-from getData import init_trees
+from src.words_trie import Trie
+from src.Sentence_trie import SentenceTrie
+from src.full_search import check_frase_as_is
+from src.getData import init_trees
 
 sentence_trie = SentenceTrie()
 words_trie = Trie()

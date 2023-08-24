@@ -1,11 +1,11 @@
 # take all txt files from dir
 
-import Sentence_trie
-import words_trie
+import src.Sentence_trie
+import src.words_trie
 import logging
 import glob
 
-ROOT_DIR = r'/Users/alex/PycharmProjects/Google_project/Texts'
+ROOT_DIR = r'/Texts'
 
 
 logging.basicConfig(level=logging.INFO)
@@ -16,7 +16,7 @@ def get_txt_files() -> list[str]:
     return glob.glob(ROOT_DIR + '/**/*.txt', recursive=True)
 
 
-def read_lines(path: str, sentenceTrie: Sentence_trie):
+def read_lines(path: str, sentenceTrie: src.Sentence_trie):
     with open(path, 'r', encoding='utf-8') as file:
         count = 0
         for line in file:
@@ -26,7 +26,7 @@ def read_lines(path: str, sentenceTrie: Sentence_trie):
             # logging.info(f"line{count}: {line}")
 
 
-def init_trees(sentenceTrie: Sentence_trie, wordsTrie: words_trie) -> (Sentence_trie, words_trie):
+def init_trees(sentenceTrie: src.Sentence_trie, wordsTrie: src.words_trie) -> (src.Sentence_trie, src.words_trie):
     files = None
     try:
         files = get_txt_files()
@@ -40,7 +40,7 @@ def init_trees(sentenceTrie: Sentence_trie, wordsTrie: words_trie) -> (Sentence_
         counter = 0
         for file in files:
             counter += 1
-            if counter == 3:
+            if counter == 20:
                 break
             print(file)
             read_lines(file, sentenceTrie)

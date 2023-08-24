@@ -1,6 +1,6 @@
-from variations import check_possible_variations, find_candidate_words_for_last_word
-from Sentence_trie import SentenceTrie, complete_sentence, SentenceNode
-from words_trie import Trie
+from src.variations import check_possible_variations, find_candidate_words_for_last_word
+from src.Sentence_trie import SentenceTrie
+from src.words_trie import Trie
 
 posible_words = ['alex', 'yehuda', 'omer', 'drive', 'drove', 'yehudi']
 

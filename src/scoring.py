@@ -1,7 +1,7 @@
 import typing
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s', datefmt='%H:%M:%S', filename='scoring.log', filemode='w')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s', datefmt='%H:%M:%S', filename='../Google_project/logs/scoring.log', filemode='w')
 
 def score_sentence(input_sentence: str, expected_sentence: str) -> int:
     """
